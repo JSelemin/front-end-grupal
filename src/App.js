@@ -1,10 +1,11 @@
 import './App.css';
-import './libros.jsx';
+import Libros from './components/Libros.jsx';
 
 function App() {
   return (
     <div className="App">
-      <libros />
+      <p>Hola</p>
+      <Libros />
     </div>
   );
 }

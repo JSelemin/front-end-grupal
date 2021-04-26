@@ -1,13 +1,13 @@
 const express = require('express');
 const mysql = require('mysql');
 const util = require('util');
-const cors = require('cors');
+/* const cors = require('cors'); */
 
 const app = express();
 const port = 3001;
 
 app.use(express.json());
-app.use(cors());
+/* app.use(cors()); */
 
 //Conexión a la BD
 const conexion = mysql.createConnection({
