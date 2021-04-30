@@ -1,13 +1,13 @@
 const express = require('express');
 const mysql = require('mysql');
 const util = require('util');
-/* const cors = require('cors'); */
+const cors = require('cors');
 
 const app = express();
 const port = 3001;
 
 app.use(express.json());
-/* app.use(cors()); */
+app.use(cors());
 
 //Conexión a la BD
 const conexion = mysql.createConnection({
@@ -37,7 +37,23 @@ app.get('/api/categorias', async (req, res) => {
     try {
         const query = 'SELECT * FROM genero';
         const respuesta = await qy(query);
-        res.send({ "respuesta": respuesta });
+        res.send({ "respuesta_db": respuesta });
+
+    }
+    catch (e) {
+        console.error(e.message);
+        res.status(413).send({ "Error inesperado": e.message });
+    }
+
+});
+
+//GET /libros para devolver todos los libros
+app.get('/api/libros', async (req, res) => {
+        
+    try {
+        const query = 'SELECT * FROM libros';
+        const respuesta = await qy(query);
+        res.send({ "respuesta_db": respuesta })
 
     }
     catch (e) {
@@ -61,6 +77,7 @@ app.get('/api/categorias/:id', async (req, res) => {
     }
 
 });
+
 
 
 //POST /categorias para guardar una categoria nueva
@@ -223,6 +240,7 @@ app.delete('/api/personas/:id', async (req, res) => {
 
         let query = 'SELECT * from libros WHERE id_persona = ?';
         let respuesta = await qy(query, [req.params.id]);
+        
 
         if (respuesta.length > 0) {
             throw new Error('No se puede eliminar la persona dado que posee libros prestados.');
@@ -290,21 +308,6 @@ app.post('/api/libros', async (req, res) => {
 });
 
 
-//GET /libros para devolver todos los libros
-app.get('/api/libros', async (req, res) => {
-
-    try {
-        const query = 'SELECT * FROM libros';
-        const respuesta = await qy(query, [req.params.id, req.body.nombre, req.body.descripcion, req.body.id_genero, req.body.id_persona]);
-        console.log(respuesta);
-
-    }
-    catch (e) {
-        console.error(e.message);
-        res.status(413).send({ "Error inesperado": e.message });
-    }
-
-});
 
 
 //GET /libros/:id para devolver un solo libro

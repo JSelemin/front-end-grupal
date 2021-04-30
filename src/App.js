@@ -1,11 +1,14 @@
 import './App.css';
-import Libros from './components/Libros.jsx';
+import GetCategorias from './components/GetCategorias.jsx';
+import GetLibros from './components/GetLibros.jsx';
 
 function App() {
   return (
     <div className="App">
-      <p>Hola</p>
-      <Libros />
+      <div className='gets'>
+      <GetCategorias />
+      <GetLibros />
+      </div>
     </div>
   );
 }
