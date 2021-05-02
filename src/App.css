@@ -3,3 +3,14 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
+
+.categoria {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.botones {
+    display: flex;
+    flex-direction: row;
+}

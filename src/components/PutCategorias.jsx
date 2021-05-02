@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 
-export default function PostCategorias() {
+export default function PutCategorias(props) {
 
     const [form, setForm] = useState({
         id: undefined,
@@ -14,16 +14,15 @@ export default function PostCategorias() {
         setForm(nuevoState);
     }
 
-    const guardar = async () => {
-        await axios.post('http://localhost:3001/api/categorias', form);
+    const editar = async () => {
+        await axios.put('http://localhost:3001/api/categorias/' + props.idCategoria, form);
         window.location.reload(false);
     }
 
     return (
         <div>
-            <h1>Categoría Nueva</h1>
-            <input name="nombre" type="text" autoComplete="off" placeholder="Categoria Nueva" value={form.nombre} onChange={handleChangeNombre} />
-            <button onClick={guardar}>Guardar</button>
+             <input name="nombre" type="text" autoComplete="off" value={props.nombreCategoria} onChange={handleChangeNombre} />
+            <button onClick={editar}>Editar</button>
         </div>
     )
 };

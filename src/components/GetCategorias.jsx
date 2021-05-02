@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import DeleteCategorias from './DeleteCategorias';
+/* import PutCategorias from './PutCategorias'; */
 import axios from 'axios';
 
 export default function GetCategorias() {
@@ -27,9 +29,13 @@ export default function GetCategorias() {
             <h1>Categorias:</h1>
             {listado.map(unaCategoria => (
                 <div key={unaCategoria.id} className='categoria'>
-                <h3>{unaCategoria.nombre}</h3>
+                    <h3>{unaCategoria.nombre}</h3>
+                    <div className='botones'>
+                        <DeleteCategorias idCategoria={unaCategoria.id} />
+{/*                         <PutCategorias idCategoria={unaCategoria.id} nombreCategoria={unaCategoria.nombre} /> */}
+                    </div>
                 </div>
-                ))}
+            ))}
         </div>
     )
 
